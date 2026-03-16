@@ -5,14 +5,23 @@ export default function Home() {
     {
       label: "Bot WhatsApp 1",
       href: "https://ayreschatbot.up.railway.app/",
+      note: "Endpoint utama untuk koneksi QR Bot 1.",
+      buttonClass:
+        "from-fuchsia-500 to-rose-500 hover:from-fuchsia-400 hover:to-rose-400 shadow-fuchsia-900/45",
     },
     {
       label: "Bot WhatsApp 2",
       href: "https://ayreschatbot2.up.railway.app/",
+      note: "Endpoint paralel kedua untuk koneksi QR Bot 2.",
+      buttonClass:
+        "from-rose-500 to-orange-500 hover:from-rose-400 hover:to-orange-400 shadow-rose-900/45",
     },
     {
       label: "Bot WhatsApp 3",
       href: "https://ayreschatbot3.up.railway.app/",
+      note: "Endpoint paralel ketiga untuk koneksi QR Bot 3.",
+      buttonClass:
+        "from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 shadow-orange-900/45",
     },
   ];
 
@@ -39,12 +48,29 @@ export default function Home() {
             Gateway Dashboard
           </p>
           <h1 className="mt-3 text-2xl font-semibold text-white sm:text-3xl">
-            Ayres Parallel Bot Connector
+            Ayres Apparel Bot Connector
           </h1>
           <p className="mt-3 text-sm text-slate-300 sm:text-base">
             Pilih bot WhatsApp yang ingin dihubungkan
           </p>
         </header>
+
+        <div className="mt-6 rounded-2xl border border-white/15 bg-black/25 p-4 text-slate-200 sm:p-5">
+          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-fuchsia-200/90">
+            Keterangan Lengkap
+          </p>
+          <p className="mt-2 text-sm leading-relaxed text-slate-300">
+            Halaman ini hanya berfungsi sebagai gateway connector, bukan mesin
+            chatbot. Klik salah satu tombol bot di bawah untuk membuka halaman
+            QR pada tab baru, lalu scan QR menggunakan aplikasi WhatsApp Anda.
+          </p>
+          <div className="mt-3 space-y-1 text-sm text-slate-300">
+            <p>1. Pilih bot yang ingin dihubungkan.</p>
+            <p>2. Halaman QR bot akan terbuka di tab baru.</p>
+            <p>3. Scan QR menggunakan WhatsApp di perangkat Anda.</p>
+            <p>4. Kembali ke halaman ini jika ingin ganti bot.</p>
+          </div>
+        </div>
 
         <div className="mt-8 flex flex-col gap-4">
           {botLinks.map((bot) => (
@@ -53,9 +79,14 @@ export default function Home() {
               href={bot.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative overflow-hidden rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-4 text-center text-base font-semibold text-white shadow-lg shadow-cyan-900/40 transition-transform duration-300 ease-out hover:scale-[1.03] hover:from-cyan-400 hover:to-blue-500"
+              className={`group relative overflow-hidden rounded-2xl bg-gradient-to-r px-5 py-4 text-center text-white shadow-lg transition-transform duration-300 ease-out hover:scale-[1.03] ${bot.buttonClass}`}
             >
-              <span className="relative z-10">{bot.label}</span>
+              <span className="relative z-10 block text-base font-semibold">
+                {bot.label}
+              </span>
+              <span className="relative z-10 mt-1 block text-xs text-white/90">
+                {bot.note}
+              </span>
               <span className="absolute inset-0 bg-white/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
             </a>
           ))}
