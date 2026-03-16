@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ayres Apparel Bot Connector
 
-## Getting Started
+Ayres Apparel Bot Connector is a modern, high-performance gateway dashboard designed to streamline the connection process for multiple WhatsApp bots. It provides a centralized interface for users to quickly scan QR codes and link their devices to different bot instances.
 
-First, run the development server:
+## ✨ Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+-   **Multi-Bot Support:** Easily switch between and manage multiple WhatsApp bot connections from a single dashboard.
+-   **QR Scan Gateway:** Seamlessly redirects users to the respective bot instances for QR code authentication.
+-   **Immersive UI:** High-performance 3D background with animated grid effects powered by Three.js.
+-   **Responsive Design:** Optimized for both desktop and mobile devices using Tailwind CSS.
+-   **Glassmorphism Effects:** Modern and sleek user interface with frosted glass aesthetics.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+-   **Framework:** [Next.js 15+](https://nextjs.org/)
+-   **Styling:** [Tailwind CSS 4](https://tailwindcss.com/)
+-   **Graphics:** [Three.js](https://threejs.org/) & [React Three Fiber](https://docs.pmnd.rs/react-three-fiber)
+-   **Visual Effects:** Post-processing for bloom, chromatic aberration, and noise effects.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Getting Started
 
-## Learn More
+### Prerequisites
 
-To learn more about Next.js, take a look at the following resources:
+-   Node.js (Latest LTS version recommended)
+-   npm, yarn, pnpm, or bun
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Installation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1.  Clone the repository:
+    ```bash
+    git clone https://github.com/EzraNahumury/web_chatbot.git
+    cd web_chatbot
+    ```
 
-## Deploy on Vercel
+2.  Install dependencies:
+    ```bash
+    npm install
+    # or
+    yarn install
+    # or
+    pnpm install
+    # or
+    bun install
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3.  Run the development server:
+    ```bash
+    npm run dev
+    # or
+    yarn dev
+    # or
+    pnpm dev
+    # or
+    bun dev
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4.  Open [http://localhost:3000](http://localhost:3000) with your browser to see the dashboard.
+
+## 📁 Project Structure
+
+-   `app/`: Contains the Next.js App Router pages and global styles.
+-   `components/`: Reusable React components (e.g., `GridScan` for the 3D background).
+-   `public/`: Static assets such as icons and images.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
