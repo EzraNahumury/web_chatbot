@@ -4,21 +4,21 @@ export default function Home() {
   const botLinks = [
     {
       label: "Bot WhatsApp 1",
-      href: "https://ayreschatbot.up.railway.app/",
+      href: "https://ayreschatbot1.up.railway.app/",
       note: "Endpoint utama untuk koneksi QR Bot 1.",
       buttonClass:
         "from-fuchsia-500 to-rose-500 hover:from-fuchsia-400 hover:to-rose-400 shadow-fuchsia-900/45",
     },
     {
       label: "Bot WhatsApp 2",
-      href: "https://ayreschatbot2.up.railway.app/",
+      href: "https://ayreschatbot4.up.railway.app/",
       note: "Endpoint paralel kedua untuk koneksi QR Bot 2.",
       buttonClass:
         "from-rose-500 to-orange-500 hover:from-rose-400 hover:to-orange-400 shadow-rose-900/45",
     },
     {
       label: "Bot WhatsApp 3",
-      href: "https://ayreschatbot3.up.railway.app/",
+      href: "https://ayreschatbot5.up.railway.app/",
       note: "Endpoint paralel ketiga untuk koneksi QR Bot 3.",
       buttonClass:
         "from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 shadow-orange-900/45",
