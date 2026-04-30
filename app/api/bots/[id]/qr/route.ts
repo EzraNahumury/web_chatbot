@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import QRCode from "qrcode";
-import { getBot, isValidBotId } from "@/lib/bot-registry";
+import { getBot, isValidBotId } from "@/lib/bot-state";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";

@@ -1,40 +1,18 @@
-// Holds the 3 bot worker_threads as a process-wide singleton, so Next.js
-// API routes can read status/QR and forward commands.
-//
-// Spawned once from instrumentation.ts when the Next.js server boots.
+// Spawns the 3 bot worker_threads on Next.js boot.
+// Loaded at runtime by instrumentation.ts via createRequire so Next.js's
+// bundler never sees the worker_threads import.
 
-import { Worker } from "worker_threads";
-import path from "path";
-import fs from "fs";
+const { Worker } = require("worker_threads");
+const path = require("path");
+const fs = require("fs");
 
-const BOT_IDS = ["chatbot01", "chatbot02", "chatbot03"] as const;
-type BotId = (typeof BOT_IDS)[number];
-
-type BotStatus = {
-  status: string;
-  connectedAt?: string | null;
-  reconnectAttempts?: number;
-  lastDisconnectReason?: string | null;
-  hasQR?: boolean;
-};
-
-type BotEntry = {
-  worker: Worker;
-  status: BotStatus;
-  qr: string | null;
-};
-
-declare global {
-  // eslint-disable-next-line no-var
-  var __botRegistry: Record<string, BotEntry> | undefined;
-}
-
+const BOT_IDS = ["chatbot01", "chatbot02", "chatbot03"];
 const PROJECT_ROOT = process.cwd();
 const DATA_DIR = path.join(PROJECT_ROOT, "data");
 const SESSIONS_ROOT = path.join(DATA_DIR, "sessions");
 const LOGS_ROOT = path.join(DATA_DIR, "logs");
 
-function buildWorkerEnv(id: BotId) {
+function buildWorkerEnv(id) {
   const upper = id.toUpperCase();
   return {
     BOT_ID: id,
@@ -62,12 +40,11 @@ function buildWorkerEnv(id: BotId) {
   };
 }
 
-function spawnBot(id: BotId) {
-  const reg = globalThis.__botRegistry!;
-  const worker = new Worker(
-    path.join(PROJECT_ROOT, "workers", "bot-worker.js"),
-    { workerData: { id, env: buildWorkerEnv(id) } },
-  );
+function spawnBot(id) {
+  const reg = globalThis.__botRegistry;
+  const worker = new Worker(path.join(PROJECT_ROOT, "workers", "bot-worker.js"), {
+    workerData: { id, env: buildWorkerEnv(id) },
+  });
 
   reg[id] = {
     worker,
@@ -94,7 +71,7 @@ function spawnBot(id: BotId) {
   console.log(`[bot:${id}] worker spawned`);
 }
 
-export function startBots() {
+function startBots() {
   if (globalThis.__botRegistry) return;
   globalThis.__botRegistry = {};
   for (const dir of [SESSIONS_ROOT, LOGS_ROOT]) {
@@ -103,10 +80,4 @@ export function startBots() {
   for (const id of BOT_IDS) spawnBot(id);
 }
 
-export function getBot(id: string): BotEntry | undefined {
-  return globalThis.__botRegistry?.[id];
-}
-
-export function isValidBotId(id: string): id is BotId {
-  return (BOT_IDS as readonly string[]).includes(id);
-}
+module.exports = { startBots };
