@@ -73,11 +73,24 @@ function spawnBot(id) {
 
 function startBots() {
   if (globalThis.__botRegistry) return;
+  console.log(
+    `[bot-registry] cwd=${PROJECT_ROOT} dataDir=${DATA_DIR} node=${process.version}`,
+  );
   globalThis.__botRegistry = {};
   for (const dir of [SESSIONS_ROOT, LOGS_ROOT]) {
-    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+    try {
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+    } catch (err) {
+      console.error(`[bot-registry] mkdir failed for ${dir}:`, err);
+    }
   }
-  for (const id of BOT_IDS) spawnBot(id);
+  for (const id of BOT_IDS) {
+    try {
+      spawnBot(id);
+    } catch (err) {
+      console.error(`[bot-registry] spawnBot(${id}) failed:`, err);
+    }
+  }
 }
 
 module.exports = { startBots };
