@@ -36,6 +36,10 @@ yarn-error.log*
 # vercel
 .vercel
 
+# bot runtime data (whatsapp sessions + logs)
+/data/sessions/
+/data/logs/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
