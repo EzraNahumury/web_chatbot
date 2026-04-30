@@ -144,6 +144,12 @@ export default function BotPanel({ id, name }: { id: string; name: string }) {
           <div className="flex flex-col items-center gap-3">
             <div className="h-12 w-12 animate-spin rounded-full border-4 border-slate-700 border-t-cyan-400" />
             <div className="text-sm text-slate-500">Status: {status} — menunggu...</div>
+            {data.lastDisconnectReason && (
+              <div className="mt-2 max-w-xs text-xs text-rose-300/80 break-words">
+                {data.reconnectAttempts ? `attempt #${data.reconnectAttempts} · ` : ""}
+                {data.lastDisconnectReason}
+              </div>
+            )}
           </div>
         )}
       </div>
