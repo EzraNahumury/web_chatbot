@@ -1,7 +1,8 @@
 // Bot worker thread.
-// Runs one Baileys bot instance in isolation. Started by server.js.
+// Runs one Baileys bot instance in isolation.
+// Spawned by lib/bot-registry.ts (via Next.js instrumentation hook).
 
-const { workerData, parentPort } = require("node:worker_threads");
+const { workerData, parentPort } = require("worker_threads");
 
 // Apply per-bot env BEFORE requiring bot modules (they read env at load time).
 const env = workerData.env || {};
@@ -12,7 +13,7 @@ for (const [key, value] of Object.entries(env)) {
 }
 
 // Wire the worker bridge so setStatus / setQR forward to the parent.
-const healthcheck = require("./lib/bot/core/healthcheck");
+const healthcheck = require("../lib/bot/core/healthcheck");
 healthcheck.setParentPort(parentPort);
 
 const {
@@ -20,9 +21,9 @@ const {
   startConnectionWatchdog,
   requestReconnect,
   logoutBot,
-} = require("./lib/bot/core/connection");
+} = require("../lib/bot/core/connection");
 
-const { logger } = require("./lib/bot/utils/logger");
+const { logger } = require("../lib/bot/utils/logger");
 
 logger.info(
   { botId: workerData.id, model: process.env.OLLAMA_MODEL },
