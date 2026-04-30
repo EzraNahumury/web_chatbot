@@ -32,6 +32,13 @@ logger.info(
 
 startConnectionWatchdog();
 startConnection().catch((err) => {
+  // Surface the real error to console so it shows up in hostinger logs
+  // (pino-pretty output is being suppressed there).
+  console.error(
+    `[bot:${workerData.id}] startConnection() rejected:`,
+    err && err.message ? err.message : err,
+    err && err.stack ? "\n" + err.stack : "",
+  );
   logger.error({ err: err.message }, "Bot worker startup failed");
   setTimeout(() => requestReconnect("startup failure"), 3000);
 });
@@ -51,11 +58,17 @@ parentPort.on("message", async (msg) => {
 });
 
 process.on("uncaughtException", (err) => {
+  console.error(
+    `[bot:${workerData.id}] uncaughtException:`,
+    err && err.message,
+    err && err.stack ? "\n" + err.stack : "",
+  );
   logger.error({ err: err.message, stack: err.stack }, "Uncaught exception");
   requestReconnect("uncaught exception");
 });
 
 process.on("unhandledRejection", (reason) => {
+  console.error(`[bot:${workerData.id}] unhandledRejection:`, reason);
   logger.error({ reason }, "Unhandled rejection");
   requestReconnect("unhandled rejection");
 });
