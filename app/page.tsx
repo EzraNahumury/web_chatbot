@@ -4,21 +4,21 @@ export default function Home() {
   const botLinks = [
     {
       label: "Bot WhatsApp 1",
-      href: "/chatbot01",
+      href: "#",
       note: "Endpoint utama untuk koneksi QR Bot 1.",
       buttonClass:
         "from-fuchsia-500 to-rose-500 hover:from-fuchsia-400 hover:to-rose-400 shadow-fuchsia-900/45",
     },
     {
       label: "Bot WhatsApp 2",
-      href: "/chatbot02",
+      href: "#",
       note: "Endpoint paralel kedua untuk koneksi QR Bot 2.",
       buttonClass:
         "from-rose-500 to-orange-500 hover:from-rose-400 hover:to-orange-400 shadow-rose-900/45",
     },
     {
       label: "Bot WhatsApp 3",
-      href: "/chatbot03",
+      href: "#",
       note: "Endpoint paralel ketiga untuk koneksi QR Bot 3.",
       buttonClass:
         "from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 shadow-orange-900/45",
@@ -75,7 +75,7 @@ export default function Home() {
         <div className="mt-8 flex flex-col gap-4">
           {botLinks.map((bot) => (
             <a
-              key={bot.href}
+              key={bot.href + bot.label}
               href={bot.href}
               target="_blank"
               rel="noopener noreferrer"
